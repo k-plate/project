@@ -1,0 +1,860 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: 0;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.clear {
+    clear: both;
+}
+
+textarea {
+    resize: none;
+}
+
+input, textarea, select, option {
+    font-family: "微软雅黑", Arial, Helvetica, sans-serif;
+}
+
+div {
+    text-align: left;
+}
+
+a {
+    text-decoration: none;
+}
+
+.clear {
+    clear: both;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+img {
+    border: 0px;
+}
+
+:focus {
+    OUTLINE-STYLE: none;
+    OUTLINE-COLOR: invert;
+    OUTLINE-WIDTH: 0px;
+}
+
+ul {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+li {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    border: 0px;
+}
+
+h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+h2 {
+    margin: 0px;
+    padding: 0px;
+    font-weight: normal;
+}
+
+h3 {
+    margin: 0px;
+    padding: 0px;
+}
+
+a, button, input {
+    -webkit-tap-highlight-color: rgba(255, 0, 0, 0);
+}
+
+p {
+    padding: 0px;
+    margin: 0px;
+}
+
+input[type="button"], input[type="submit"], input[type="reset"] {
+    -webkit-appearance: none;
+}
+
+input {
+    -webkit-user-modify: read-write-plaintext-only;
+}
+
+textarea {
+    -webkit-appearance: none;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.l_head {
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    font-family: "黑体";
+    font-size: 28px;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    text-indent: 20px;
+}
+
+.l_head a {
+    color: #333;
+}
+
+.l_main {
+    width: 100%;
+    height: 100%;
+}
+
+.l_box {
+    width: 354px;
+    height: 187px;
+    border: 1px solid #ccc;
+    margin: 10% auto;
+    padding-top: 10px;
+    font-family: "微软雅黑";
+    font-size: 14px;
+}
+
+.l_box tr {
+    height: 55px;
+}
+
+.riqi {
+    width: 86px;
+    text-align: right;
+}
+
+.srk {
+    width: 200px;
+    height: 30px;
+    border: 1px solid #ddd;
+    margin-left: 10px;
+}
+
+.forgetpw {
+    color: #333;
+    text-decoration: underline;
+    margin-right: 53px;
+    font-size: 12px;
+}
+
+.loadingbtn {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.l_box .heightsm {
+    height: 20px;
+}
+
+.l_footer {
+    width: 90%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    color: #bbb;
+    bottom: 20px;
+}
+
+/*忘记密码*/
+.l_box .boxtit {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-family: "黑体";
+    font-size: 20px;
+}
+
+.resize .riqi {
+    width: 100px;
+}
+
+.yzm {
+    width: 100px;
+    height: 30px;
+    border: 1px solid #ddd;
+    margin-left: 10px;
+}
+
+.sendyzm {
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    line-height: 30px;
+    margin-left: 5px;
+}
+
+.left10 {
+    margin-left: 10px;
+}
+
+/*轮播图*/
+.main {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+}
+
+.menu {
+    width: 12%;
+    height: auto;
+    border-right: 1px solid #ddd;
+    margin-left: 10px;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu ul li {
+    width: 100%;
+    height: 30px;
+    margin-bottom: 10px;
+}
+
+.menu ul li a {
+    display: block;
+    width: 94%;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    color: #333;
+}
+
+.menu ul li a.menuon {
+    background: #f00;
+    color: #fff;
+}
+
+.con_r {
+    width: 100%;
+}
+
+.con_r h1 {
+    width: 100%;
+    height: 40px;
+    line-height: 30px;
+    font-family: "黑体";
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.contents {
+    width: 100%;
+    height: auto;
+}
+
+.banner_tab {
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-bottom: 1px solid #ddd;
+    border-left: 1px solid #ddd;
+    font-size: 12px;
+    text-align: center;
+}
+
+.banner_tab tr {
+    height: 90px;
+}
+
+.banner_tab tr td {
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+
+.banner_tab .biath {
+    height: 30px;
+    font-weight: bold;
+}
+
+.edit {
+    color: #333;
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    line-height: 30px;
+}
+
+/*添加轮播图*/
+.upimgtb {
+    width: 400px;
+    height: auto;
+    margin: 20px auto;
+    font-size: 12px;
+}
+
+.upimgtb tr {
+    height: 100px;
+}
+
+.upimgtb img {
+    width: 235px;
+    height: 162px;
+}
+
+.upfile {
+    position: relative;
+    width: 104px;
+    height: auto;
+    margin-left: 70px;
+    margin-top: 10px;
+}
+
+.upimg {
+    display: inline-block;
+    width: 104px;
+    height: 32px;
+    border: 1px solid #ddd;
+    line-height: 32px;
+    text-align: center;
+    color: #333;
+    border-radius: 5px;
+}
+
+.upcja {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 104px;
+    height: 32px;
+    opacity: 0;
+    z-index: 99;
+    cursor: pointer;
+}
+
+/*新车置换*/
+.gltable {
+    width: 100%;
+    height: auto;
+    margin-top: 10px;
+    font-size: 12px;
+    text-align: center;
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+
+.gltable tr {
+    height: 30px;
+}
+
+.gltable tr td {
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.gltable tr td a {
+    color: #333;
+    margin-left: 5px;
+}
+
+.addmj {
+    width: 100px;
+    height: 30px;
+    line-height: 28px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 12px;
+    color: #333;
+    display: block;
+    margin-top: 10px;
+}
+
+/*政策弹窗*/
+.qrbtn {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.zcbox {
+    width: 412px;
+    height: 250px;
+    border: 1px solid #ddd;
+    background: #fff;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-left: -206px;
+    z-index: 99;
+    display: none;
+}
+
+.zcbox h2 {
+    width: 95%;
+    height: 30px;
+    line-height: 30px;
+    font-family: "黑体";
+    font-size: 20px;
+    text-align: center;
+    margin: 10px auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.zcbox p {
+    width: 80%;
+    height: auto;
+    font-size: 12px;
+    line-height: 20px;
+    margin: 0 auto 10px auto;
+}
+
+.qrbox {
+    width: 268px;
+    height: 180px;
+    border: 1px solid #ddd;
+    background: #fff;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    margin-left: -206px;
+    z-index: 99;
+    display: none;
+}
+
+.qrbox h2 {
+    width: 95%;
+    height: 30px;
+    line-height: 30px;
+    font-family: "黑体";
+    font-size: 20px;
+    text-align: center;
+    margin: 10px auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.qrbox p {
+    width: 80%;
+    height: 80px;
+    line-height: 50px;
+    font-size: 12px;
+    margin: 0 auto;
+}
+
+/*添加编辑志华车辆*/
+.alltab {
+    width: 100%;
+    height: auto;
+    font-size: 12px;
+}
+
+.alltab tr {
+    min-height: 40px;
+    _height: 40px;
+    overflow: hidden;
+    *overflow: visible;
+}
+
+.alltab tr.bigfont {
+    font-size: 16px;
+    height: 60px;
+    line-height: 60px;
+}
+
+.addcars {
+    width: 100%;
+    height: auto;
+    border-right: 1px solid #ddd;
+    border-top: 1px solid #ddd;
+}
+
+.addcars tr {
+    height: 30px;
+}
+
+.addcars tr td {
+    border-left: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding-left: 10px;
+}
+
+.imglist {
+    width: 705px;
+    height: auto;
+    float: left;
+}
+
+.imglist ul {
+    list-style: none;
+}
+
+.imglist ul li {
+    float: left;
+    width: 200px;
+    height: auto;
+    margin-right: 25px;
+    margin-bottom: 10px;
+}
+
+.imglist ul li img {
+    width: 200px;
+    height: 100px;
+}
+
+.noleft {
+    margin-left: 0px;
+    margin: 0 auto;
+}
+
+.zctextarea {
+    width: 700px;
+    height: 270px;
+    border: 1px solid #ddd;
+}
+
+.left100 {
+    margin-left: 200px;
+    margin-top: 30px;
+}
+
+.addcars .srk {
+    height: 20px;
+    width: 90%;
+}
+
+.bigsrk {
+    width: 90%;
+    height: 40px;
+    border: 1px solid #ddd;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*4-1*/
+#policy {
+    background: none !important;;
+    border: 0;
+    width: 100%;
+    height: 135px;
+    line-height: 20px;
+    display: inline;
+    padding: 0
+}
+
+/*新车管理2016/11/22 15:54 spc*/
+.cartype-cent ul li {
+    margin-bottom: 15px;
+
+}
+
+.col-sm-cent1 {
+    width: 22%;
+    float: left;
+}
+
+.col-sm-cent2 {
+    width: 29%;
+    float: left;
+}
+
+.col-sm-cent3 {
+    width: 26%;
+    float: left;
+    margin-left: 2% !important;
+}
+
+.col-sm-cent3 span {
+    width: 67% !important;
+}
+
+.col-sm-cent4 {
+    width: 24%;
+    float: left;
+}
+
+.col-sm-cent2 span, .col-sm-cent3 span, .col-sm-cent4 span {
+    float: left;
+    width: 74%;
+    display: inline-block;
+}
+
+.col-sm-cent2 span tr {
+    text-align: left;
+
+    background: none;
+}
+
+.magin-cent {
+    margin-left: 25% !important;
+}
+
+.add-car-type {
+    margin-left: 39% !important;
+}
+
+.cartype-cent ul li input[type="text"] {
+    text-align: center;
+}
+
+.closer {
+    color: #f08300;
+    padding-left: 15px;
+    background: none;
+    border: none;
+    margin-left: 3px;
+}
+
+.add-cla-cent {
+    height: 30px;
+    width: 90px;
+    color: #333;
+    border: none;
+    border-radius: 3px;
+    text-align: center;
+    background: #E7E7E7;
+    margin-left: 20px;
+}
+
+/*.table-merchant-list  tr td{*/
+/*float: left;*/
+/*width:100%;*/
+/*}*/
+/*.table-merchant-list  tr button{*/
+/*float: right;*/
+/*}*/
+
+/*车辆预览*/
+.preview-cent li {
+    width: 20%;
+    float: left;
+
+    margin: auto;
+}
+
+.preview-title {
+    line-height: 26px;
+}
+
+.preview-img {
+    height: 150px;
+    text-align: center !important;
+}
+
+.preview-img img {
+    height: 150px;
+}
+
+.preview-cent li p {
+    width: 78%;
+    margin-left: 11%;
+    text-align: center;
+}
+
+.preview-cent li p img {
+    width: 100%;
+    border: solid 1px #707070;
+}
+
+.preview-cent li a:hover, .preview-cent li a:focus {
+    color: #fff !important;
+    text-decoration: underline;
+}
+
+.add-img-cent {
+    height: 150px;
+    width: 200px;
+    line-height: 150px;
+    text-align: center;
+    background: #E7E7E7;
+    color: #333;
+    font-size: 18px;
+    margin-top: 26px;
+    border: none;
+}
+
+.edit-btn {
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    background: #0062ac !important;
+    margin-right: 40px;
+    margin-top: 10px;
+}
+
+.close-btn {
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    background: #f08300 !important;
+    margin-left: 40px;
+    margin-top: 10px;
+}
+
+/*按钮背景色*/
+#faile, #faile2, #faile3, #faile4 {
+    background: #f08300 !important;
+    border-color: #f08300 !important;
+}
+
+.dui {
+    background: #0062ac !important;
+}
+
+.fl-l {
+    float: left;
+    margin-left: 11%;
+}
+
+.fl-r {
+    float: right;
+}
+
+/*模軚窗口*/
+.modal-dialog {
+    margin-top: 10% !important;
+}
+
+@media only screen and (max-width: 1400px) {
+    .add-car-type {
+        margin-left: 38% !important;
+    }
+}
+
+/*车辆预览*/
+.preview-cent li {
+    width: 20%;
+    float: left;
+
+    margin: auto;
+}
+
+.preview-title {
+    line-height: 26px;
+}
+
+.preview-img {
+    height: 150px;
+    text-align: center !important;
+}
+
+.preview-img img {
+    height: 150px;
+}
+
+.preview-cent li p {
+    width: 78%;
+    margin-left: 11%;
+    text-align: center;
+}
+
+.preview-cent li p img {
+    width: 100%;
+    border: solid 1px #707070;
+}
+
+.preview-cent li a:hover, .preview-cent li a:focus {
+    color: #fff !important;
+    text-decoration: underline;
+}
+
+.preview-cent2 li {
+    width: 20%;
+    float: left;
+    height: 250px;
+    margin: auto;
+}
+
+.preview-cent2 li p {
+    width: 90%;
+    margin-left: 11%;
+    text-align: center;
+}
+
+.preview-cent2 li p img {
+    width: 100%;
+    border: solid 1px #707070;
+}
+
+.preview-cent2 li a:hover, .preview-cent li a:focus {
+    color: #fff !important;
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+
+
+
+
+

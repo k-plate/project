@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>优卡拍卖业务后台管理系统</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/AdminLTE.min.css">
+  <link rel="stylesheet" href="css/all-skins.min.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/easyui.css">
+  <link rel="stylesheet" href="css/icon.css">
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+</head>
+<body class="hold-transition skin-blue sidebar-mini" >
+<div class="wrapper" id="honghu_cloud" v-cloak>
+	<div class="hh-app-pos">
+  <header class="main-header">
+    <a href="javascript:;" class="logo">
+      <span class="logo-mini"><b>优卡竞拍</b></span>
+      <span class="logo-lg"><b>优卡竞拍管理后台</b></span>
+    </a>
+    <nav class="navbar navbar-static-top" role="navigation">
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li>
+          	  <a href="javascript:;" @click="updatePassword"><i class="fa fa-codepen"></i> &nbsp;修改密码</a>
+		  </li>
+          <li class="nav-user-slider">
+              <a href="javascript:;"><img src="css/images/header-default.png"></a>
+              <div class="navbar-sub-menu">
+              	 <dl class="navbar-sub-user"><dt><a><img src="css/images/header-default.png"></a></dt><dd>{{user.username}}</dd></dl>
+                  <p class="nav-menu-exit"><a href="javascript:;" @click="logout"> &nbsp;退出管理控制台</a></p>
+          	  </div>
+          </li>
+		</ul>
+      </div>
+    </nav>
+  </header>
+
+  <aside class="main-sidebar">
+      <div class="main-scroll-hidden">
+	      	<a href="#" class="sidebar-toggle" id="leftMenuBtn" role="button">
+	        <span class="sr-only">Toggle navigation</span>
+	      </a>
+	    <section class="sidebar">
+	      <div class="sidebar-div">
+		      <ul class="sidebar-menu">
+				<menu-item :item="item" :index="index" v-for="(item, index) in menuList"></menu-item>
+		      </ul>
+	      </div>
+	    </section>
+      </div>
+    <!-- /.sidebar -->
+  </aside>
+  <!-- =============================================== -->
+  <div class="content-wrapper" id="pageTab">
+	<div title="<i class='fa fa-home' style='font-size:20px;position:relative;top:2px;left:-3px;'></i>首页" style="padding:10px;">
+		<iframe scrolling="yes" frameborder="0" src="main.html"></iframe>
+	</div>
+  </div>
+  <div class="control-sidebar-bg"></div>
+  </div>
+  <!-- 修改密码 -->
+	<div id="passwordLayer" style="display: none;">
+		<form class="form-horizontal">
+		<div class="form-group">
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">账号</div>
+			    <span class="label label-success" style="vertical-align: bottom;">{{user.username}}</span>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">原密码</div>
+			   	<div class="col-sm-10">
+			      <input type="password" class="form-control" v-model="password" placeholder="原密码"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">新密码</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="newPassword" placeholder="新密码"/>
+			    </div>
+			</div>
+		</div>
+		</form>
+	</div>
+
+</div>
+<!-- ./wrapper -->
+<div id="rightLayer" class="easyui-menu" style="width: 120px;display:none;">
+    <div id="mm-tabclose" name="6">刷新</div>
+    <div id="Div1" name="1">关闭</div>
+    <div id="mm-tabcloseall" name="2">全部关闭</div>
+    <div id="mm-tabcloseother" name="3">关闭其他</div>
+    <div class="menu-sep"></div>
+    <div id="mm-tabcloseright" name="4">关闭右侧</div>
+    <div id="mm-tabcloseleft" name="5">关闭左侧</div>
+</div>
+<script src="libs/jquery.min.js"></script>
+<script src="libs/jquery.easyui.min.js"></script>
+<script src="plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<script src="libs/vue.min.js"></script>
+<script src="libs/router.js"></script>
+<script src="libs/bootstrap.min.js"></script>
+<script src="libs/app.js"></script>
+<script src="plugins/layer/layer.js"></script>
+<script src="js/common.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

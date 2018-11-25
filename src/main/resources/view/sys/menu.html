@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>资源管理</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+    <link rel="stylesheet" href="../../css/bootstrap-table.min.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <link rel="stylesheet" href="../../plugins/treegrid/jquery.treegrid.css">
+    <link rel="stylesheet" href="../../css/custom/custom.css">
+
+    <script src="../../libs/jquery.min.js"></script>
+    <script src="../../plugins/layer/layer.js"></script>
+    <script src="../../libs/bootstrap.min.js"></script>
+    <script src="../../libs/vue.min.js"></script>
+    <script src="../../libs/bootstrap-table.min.js"></script>
+    <script src="../../plugins/treegrid/jquery.treegrid.min.js"></script>
+    <script src="../../plugins/treegrid/jquery.treegrid.bootstrap3.js"></script>
+    <script src="../../plugins/treegrid/jquery.treegrid.extension.js"></script>
+    <script src="../../plugins/treegrid/tree.table.js"></script>
+    <script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+    <script src="../../js/common.js"></script>
+</head>
+<body>
+<div id="honghu_cloud" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn-djh">
+            <div class="form-group col-sm-2" style="width: 100%;">
+                权限名称：<input type="text" class="form-select" v-model="q.name" @keyup.enter="query"
+                            placeholder="角色名称">
+                资源类型：
+                <select v-model="q.type" class="form-select" @keyup.enter="query" placeholder="资源类型">
+                    <option value="">全部</option>
+                    <option value="0">主菜单</option>
+                    <option value="1">子菜单</option>
+                    <option value="2">按钮</option>
+                </select>
+                状态：
+                <select v-model="q.status" class="form-select" @keyup.enter="query" placeholder="状态">
+                    <option value="" selected="selected">全部</option>
+                    <option value="0">可用</option>
+                    <option value="1">禁用</option>
+                </select>
+            </div>
+            <a class="btn btn-info" @click="query">查询</a>
+
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+        <div style="padding-top: 20px;margin-left: 15px;">
+            <a v-if="hasPermission('sys:role:save')" class="btn btn-success" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+        </div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <input type="text" class="form-control" v-model="menu.menuId" style="display: none;"/>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">权限名称</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="menu.name" placeholder="菜单名称或按钮名称"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">权限标识</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="menu.perms"
+                           placeholder="多个用逗号分隔，如：user:list,user:create"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">权限类型</div>
+                <div class="col-sm-10">
+                    <select id="type" v-model="menu.type" onchange="typeChange()">
+                        <option value="">全部</option>
+                        <option value="0">主菜单</option>
+                        <option value="1">子菜单</option>
+                        <option value="2">按钮</option>
+                    </select>
+                </div>
+            </div>
+            <div v-if="menu.type == 1 || menu.type == 2" class="form-group" >
+                <div class="col-sm-2 control-label">主菜单</div>
+                <div class="col-sm-10">
+                    <select v-model="menu.firstMenu">
+                        <option value="">全部</option>
+                        <option :value="firstmenuEntity.menuId" v-for="firstmenuEntity in firstMenuList">
+                            {{firstmenuEntity.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div v-if="menu.type == 2" class="form-group">
+                <div class="col-sm-2 control-label">子菜单</div>
+                <div class="col-sm-10">
+                    <select v-model="menu.secondMenu">
+                        <option value="">全部</option>
+                        <option :value="secondmenuEntity.menuId" v-for="secondmenuEntity in secondMenuList">
+                            {{secondmenuEntity.name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div v-if="menu.type == 1" class="form-group">
+                <div class="col-sm-2 control-label">菜单URL</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="menu.url" placeholder="菜单URL"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">是否可用</div>
+                <div class="col-sm-10">
+                    <select v-model="menu.status">
+                        <option value="">全部</option>
+                        <option value="0">可用</option>
+                        <option value="1">不可用</option>
+                    </select>
+                </div>
+            </div>
+
+            <!--<div v-if="menu.type != 2" class="form-group">
+                <div class="col-sm-2 control-label">排序号</div>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" v-model="menu.orderNum" placeholder="排序号"/>
+                </div>
+            </div>
+            <div v-if="menu.type != 2" class="form-group">
+                <div class="col-sm-2 control-label">图标</div>
+                <div class="col-sm-10">
+
+                    <input type="text" class="form-control" v-model="menu.icon" placeholder="菜单图标"/>
+                    <code style="margin-top:4px;display: block;">获取图标：http://fontawesome.io/icons/</code>
+
+
+                </div>
+            </div>-->
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input v-if="flag==0" type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 选择菜单 -->
+<div id="menuLayer" style="display: none;padding:10px;">
+    <ul id="menuTree" class="ztree"></ul>
+</div>
+<script src="../../js/modules/sys/menu.js"></script>
+<script>
+
+    function typeChange() {
+        var value = $("type").val();
+        if (value == 0) {
+            //主菜单
+            $("#url").attr("style", "display:block");
+            $("#firstMenu").attr("style", "display:none");
+            $("#secondMenu").attr("style", "display:none");
+        } else if (value == 1) {
+            //子菜单
+            $("#url").attr("style", "display:block");
+            $("#firstMenu").attr("style", "display:block");
+            $("#secondMenu").attr("style", "display:none");
+        } else if (value == 2) {
+            //按钮
+            $("#url").attr("style", "display:none");
+            $("#firstMenu").attr("style", "display:block");
+            $("#secondMenu").attr("style", "display:block");
+        }
+    }
+</script>
+</body>
+</html>
