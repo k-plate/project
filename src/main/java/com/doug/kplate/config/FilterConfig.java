@@ -42,7 +42,7 @@ public class FilterConfig {
         return registration;
     }
 
-    @Value("${server.session.timeout}")
+    @Value("${server.servlet.session.timeout}")
     private String serverSessionTimeout;
 
     @Bean

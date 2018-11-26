@@ -16,7 +16,7 @@ public interface SysUserTokenService {
 	
 	void save(SysUserTokenEntity token);
 	
-	void update(SysUserTokenEntity token);
+	int update(SysUserTokenEntity token);
 
 	/**
 	 * 生成token

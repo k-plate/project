@@ -5,9 +5,10 @@ server:
         max-threads: 100000
         min-spare-threads: 3000
     port: 8080
-    context-path: /plate-service
-    session:
-      timeout: 7200
+    servlet:
+      context-path: /plate-service
+      session:
+        timeout: 72000s
 
 # mysql
 spring:
@@ -16,7 +17,7 @@ spring:
     jackson:
         time-zone: GMT+8
         date-format: yyyy-MM-dd HH:mm:ss
-    http:
+    servlet:
         multipart:
             max-file-size: 100MB
             max-request-size: 100MB
@@ -58,7 +59,7 @@ spring:
 # Mybatis≈‰÷√
 mybatis:
     mapperLocations: classpath:mapper/**/*.xml
-    #configLocation: classpath:mybatis.xml
+    configLocation: classpath:mybatis.xml
 
 ###################  mybatis-plus≈‰÷√  ###################
 mybatis-plus:

@@ -34,8 +34,8 @@ public class SysUserTokenServiceImpl implements SysUserTokenService {
 	}
 	
 	@Override
-	public void update(SysUserTokenEntity token){
-		sysUserTokenDao.update(token);
+	public int update(SysUserTokenEntity token){
+		return sysUserTokenDao.update(token);
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class SysUserTokenServiceImpl implements SysUserTokenService {
 			tokenEntity.setExpireTime(expireTime);
 
 			//更新token
-			update(tokenEntity);
+			int count = this.update(tokenEntity);
 		}
 
 		R r = R.ok().put("token", token).put("expire", EXPIRE);
