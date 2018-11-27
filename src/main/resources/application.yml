@@ -21,7 +21,7 @@ spring:
             max-file-size: 100MB
             max-request-size: 100MB
             enabled: true
-    # Ö¸¶¨¾²Ì¬×ÊÔ´µÄÂ·¾¶
+    # Ö¸ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½Ô´ï¿½ï¿½Â·ï¿½ï¿½
     resources:
         static-locations: classpath:/static/,classpath:/view/
     devtools:
@@ -29,19 +29,19 @@ spring:
            enabled: true
            exclude: view/**
 #    redis:
-#        open: false  # ÊÇ·ñ¿ªÆôredis»º´æ  true¿ªÆô   false¹Ø±Õ
+#        open: false  # ï¿½Ç·ï¿½ï¿½ï¿½redisï¿½ï¿½ï¿½ï¿½  trueï¿½ï¿½ï¿½ï¿½   falseï¿½Ø±ï¿½
 #        database: 0
 #        host: localhost
 #        port: 16379
-#        password:       # ÃÜÂë£¨Ä¬ÈÏÎª¿Õ£©
-#        timeout: 6000  # Á¬½Ó³¬Ê±Ê±³¤£¨ºÁÃë£©
+#        password:       # ï¿½ï¿½ï¿½ë£¨Ä¬ï¿½ï¿½Îªï¿½Õ£ï¿½
+#        timeout: 6000  # ï¿½ï¿½ï¿½Ó³ï¿½Ê±Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë£©
 #        pool:
-#            max-active: 1000  # Á¬½Ó³Ø×î´óÁ¬½ÓÊý£¨Ê¹ÓÃ¸ºÖµ±íÊ¾Ã»ÓÐÏÞÖÆ£©
-#            max-wait: -1      # Á¬½Ó³Ø×î´ó×èÈûµÈ´ýÊ±¼ä£¨Ê¹ÓÃ¸ºÖµ±íÊ¾Ã»ÓÐÏÞÖÆ£©
-#            max-idle: 10      # Á¬½Ó³ØÖÐµÄ×î´ó¿ÕÏÐÁ¬½Ó
-#            min-idle: 5       # Á¬½Ó³ØÖÐµÄ×îÐ¡¿ÕÏÐÁ¬½Ó
+#            max-active: 1000  # ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã¸ï¿½Öµï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½
+#            max-wait: -1      # ï¿½ï¿½ï¿½Ó³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´ï¿½Ê±ï¿½ä£¨Ê¹ï¿½Ã¸ï¿½Öµï¿½ï¿½Ê¾Ã»ï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½
+#            max-idle: 10      # ï¿½ï¿½ï¿½Ó³ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+#            min-idle: 5       # ï¿½ï¿½ï¿½Ó³ï¿½ï¿½Ðµï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     datasource:
-        url: jdbc:mysql://localhost:3306/k_plate?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://107.172.77.191:3306/k_plate?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
         username: root
         password: root123
         driver-class-name: com.mysql.jdbc.Driver
@@ -55,23 +55,23 @@ spring:
 
 
 
-# MybatisÅäÖÃ
+# Mybatisï¿½ï¿½ï¿½ï¿½
 mybatis:
     mapperLocations: classpath:mapper/**/*.xml
     #configLocation: classpath:mybatis.xml
 
-###################  mybatis-plusÅäÖÃ  ###################
+###################  mybatis-plusï¿½ï¿½ï¿½ï¿½  ###################
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml
   global-config:
-    id-type: 0  #0:Êý¾Ý¿âID×ÔÔö   1:ÓÃ»§ÊäÈëid  2:È«¾ÖÎ¨Ò»id(IdWorker)  3:È«¾ÖÎ¨Ò»ID(uuid)
+    id-type: 0  #0:ï¿½ï¿½ï¿½Ý¿ï¿½IDï¿½ï¿½ï¿½ï¿½   1:ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½id  2:È«ï¿½ï¿½Î¨Ò»id(IdWorker)  3:È«ï¿½ï¿½Î¨Ò»ID(uuid)
     db-column-underline: false
     refresh-mapper: true
   configuration:
     map-underscore-to-camel-case: true
-    cache-enabled: true #ÅäÖÃµÄ»º´æµÄÈ«¾Ö¿ª¹Ø
-    lazyLoadingEnabled: true #ÑÓÊ±¼ÓÔØµÄ¿ª¹Ø
-    multipleResultSetsEnabled: true #¿ªÆôµÄ»°£¬ÑÓÊ±¼ÓÔØÒ»¸öÊôÐÔÊ±»á¼ÓÔØ¸Ã¶ÔÏóÈ«²¿ÊôÐÔ£¬·ñÔò°´Ðè¼ÓÔØÊôÐÔ
+    cache-enabled: true #ï¿½ï¿½ï¿½ÃµÄ»ï¿½ï¿½ï¿½ï¿½È«ï¿½Ö¿ï¿½ï¿½ï¿½
+    lazyLoadingEnabled: true #ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ØµÄ¿ï¿½ï¿½ï¿½
+    multipleResultSetsEnabled: true #ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½Ø¸Ã¶ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 
