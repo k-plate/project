@@ -16,7 +16,6 @@ import java.util.Map;
 
 /**
  * 登录相关
- *
  */
 @RestController
 public class SysLoginController {
@@ -48,50 +47,24 @@ public class SysLoginController {
      * 登录
      */
     @RequestMapping(value = "/sys/login", method = RequestMethod.POST)
-//    String captcha,
-    public Map<String, Object> login(String username, String password) throws IOException {
+    public Map<String, Object> login(String username, String password) {
 
-//        String appId = "57d01e05e810b0074b2405d25e1c7ea6";
-//        String appSecret = "afb438a28e7a95074c03684456de4ef4";
-//        CaptchaClient captchaClient = new CaptchaClient(appId, appSecret);
-//        //captchaClient.setCaptchaUrl(captchaUrl);
-//        //特殊情况需要额外指定服务器,可以在这个指定，默认情况下不需要设置
-//        CaptchaResponse response = null;
-//        try {
-//            response = captchaClient.verifyToken(token);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println(response.getCaptchaStatus());
-//        //确保验证状态是SERVER_SUCCESS，SDK中有容错机制，在网络出现异常的情况会返回通过
-////        if (response.getResult()) {
-//        if (response.getCaptchaStatus().equals("SERVER_SUCCESS")) {
-////            /**token验证通过，继续其他流程**/
-////            String kaptcha = ShiroUtils.getKaptcha(Constants.KAPTCHA_SESSION_KEY);
-////            if (!captcha.equalsIgnoreCase(kaptcha)) {
-////                return R.error("验证码不正确");
-////            }
+        //用户信息
+        SysUserEntity user = sysUserService.queryByUserName(username);
 
-            //用户信息
-            SysUserEntity user = sysUserService.queryByUserName(username);
+        //账号不存在、密码错误
+        if (user == null || !user.getPassword().equals(new Sha256Hash(password, user.getSalt()).toHex())) {
+            return R.error("账号或密码不正确");
+        }
 
-            //账号不存在、密码错误
-            if (user == null || !user.getPassword().equals(new Sha256Hash(password, user.getSalt()).toHex())) {
-                return R.error("账号或密码不正确");
-            }
+        //账号锁定
+        if (user.getStatus() == 0) {
+            return R.error("账号已被锁定,请联系管理员");
+        }
 
-            //账号锁定
-            if (user.getStatus() == 0) {
-                return R.error("账号已被锁定,请联系管理员");
-            }
-
-            //生成token，并保存到数据库
-            R r = sysUserTokenService.createToken(user.getUserId());
-            return r;
-//        } else {
-//            /**token验证失败，业务系统可以直接阻断该次请求或者继续弹验证码**/
-//            return R.error("验证失败!");
-//        }
+        //生成token，并保存到数据库
+        R r = sysUserTokenService.createToken(user.getUserId());
+        return r;
     }
 
     public static void main(String[] args) {
