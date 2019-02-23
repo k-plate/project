@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>客户列表</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="../plugins/ztree/css/metroStyle/metroStyle.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/custom/custom.css">
+    <script src="../libs/jquery.min.js"></script>
+    <script src="../plugins/layer/layer.js"></script>
+    <script src="../libs/bootstrap.min.js"></script>
+    <script src="../libs/vue.min.js"></script>
+    <script src="../plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="../plugins/ztree/jquery.ztree.all.min.js"></script>
+    <script src="../js/common.js"></script>
+</head>
+<body>
+<div id="honghu_cloud" v-cloak class="user-honghu_cloud">
+    <div v-show="showList">
+        <div class="grid-btn-djh">
+            <div class="form-group col-sm-2" style="width: 100%;">
+                类型：
+                <select v-model="q.type" @keyup.enter="query" class="form-select">
+                    <option value="">全部</option>
+                    <option value="1">经纪人</option>
+                    <option value="2">代理商</option>
+                    <option value="3">客户</option>
+                </select>
+                用户名：<input type="text" class="form-select" v-model="q.title" @keyup.enter="query"
+                           placeholder="姓名/手机号/编号">
+                <a class="btn btn-info" @click="query">查询</a>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="form-group col-sm-2" style="width: 100%;">
+                <a class="btn btn-select" @click="selectAll(0)">&nbsp;所有用户</a>
+                <a class="btn btn-success" @click="selectAll(1)">所有经纪人</a>
+                <a class="btn btn-success" @click="selectAll(2)">所有代理商</a>
+                <a class="btn btn-success" @click="selectAll(3)">所有客户</a>
+                <a class="btn btn-success" @click="selectAll(4)">今日经纪人</a>
+                <a class="btn btn-success" @click="selectAll(5)">今日代理商</a>
+                <a class="btn btn-success" @click="selectAll(6)">今日客户</a>
+                <div style="clear:both;"></div>
+            </div>
+            <div class="form-group col-sm-2" style="width: 100%;">
+                <a class="btn btn-error" @click="add(0)"><i class="fa fa-plus"></i>&nbsp;添加经纪人</a>
+                <a class="btn btn-error" @click="add(1)"><i class="fa fa-plus"></i>&nbsp;添加代理商</a>
+                <a class="btn btn-error" @click="add(2)"><i class="fa fa-plus"></i>&nbsp;添加客户</a>
+                <div style="clear:both;"></div>
+            </div>
+            <div style="clear:both;"></div>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <!--新增经纪人-->
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">账号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="账号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">用户密码</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" value="123456" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">用户姓名</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="用户姓名"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">手机号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="手机号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input v-if="flag == 0" type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+
+
+    <!--新增代理商-->
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">代理商名称</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="代理商名称"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">余额</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" value="0" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">赠送金额</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" value="0" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">手机号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="手机号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">真实姓名</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="真实姓名"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">备注用户名</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="备注用户名"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">红利比例</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="红利比例"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">佣金比例</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="佣金比例"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">保证金</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="保证金"/>
+                </div>
+                <div class="col-sm-10">
+                    <span>说明：</span>
+                    <span>大于此保证金才能提现!</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">密码</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="密码"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">确认密码</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="确认密码"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input v-if="flag == 0" type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+
+
+    <!--新增客户-->
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">用户名(登录用)</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="系统生成" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">手机号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="手机号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">真实姓名</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="真实姓名"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">备注用户名</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="备注用户名"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">邀请码</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="默认为自己的下线客户" readonly/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">密码</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="密码"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">确认密码</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="" placeholder="确认密码"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input v-if="flag == 0" type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="../js/modules/user/agent.js"></script>
+</body>
+</html>

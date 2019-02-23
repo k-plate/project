@@ -3523,6 +3523,18 @@ a.btn.disabled,fieldset[disabled] a.btn {
     border-color: #4cae4c
 }
 
+.btn-select{
+    color: #fff;
+    background-color: #41cac0;
+    border-color: #41cac0;
+}
+
+.btn-error{
+    color: #fff;
+    background-color: #ec6459;
+    border-color: #ec6459;
+}
+
 .btn-success.focus,.btn-success:focus {
     color: #fff;
     background-color: #449d44;

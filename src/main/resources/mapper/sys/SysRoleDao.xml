@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.doug.kplate.dao.SysRoleDao">
+<mapper namespace="com.doug.kplate.dao.sys.SysRoleDao">
 
-	<select id="queryObject" resultType="com.doug.kplate.entity.SysRoleEntity">
+	<select id="queryObject" resultType="com.doug.kplate.entity.sys.SysRoleEntity">
 		select * from sys_role where role_id = #{value}
 	</select>
 	
-	<select id="queryList" resultType="com.doug.kplate.entity.SysRoleEntity">
-		select r.*, (select d.name from sys_dept d where d.dept_id = r.dept_id) deptName from sys_role r
+	<select id="queryList" resultType="com.doug.kplate.entity.sys.SysRoleEntity">
+		select r.* from sys_role r
 		<where>
 			<if test="roleName != null and roleName.trim() != ''">
 				and r.`role_name` like concat('%',#{roleName},'%')
@@ -45,7 +45,7 @@
 		</where>
 	</select>
 
-	<insert id="save" parameterType="com.doug.kplate.entity.SysRoleEntity" useGeneratedKeys="true" keyProperty="roleId">
+	<insert id="save" parameterType="com.doug.kplate.entity.sys.SysRoleEntity" useGeneratedKeys="true" keyProperty="roleId">
 		insert into sys_role
 		(
 			`role_id`, 
@@ -64,7 +64,7 @@
 		)
 	</insert>
 	 
-	<update id="update" parameterType="com.doug.kplate.entity.SysRoleEntity">
+	<update id="update" parameterType="com.doug.kplate.entity.sys.SysRoleEntity">
 		update sys_role 
 		<set> 
 			<if test="roleName != null">`role_name` = #{roleName}, </if>

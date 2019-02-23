@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.doug.kplate.dao.SysMenuDao">
+<mapper namespace="com.doug.kplate.dao.sys.SysMenuDao">
 
-    <select id="queryObject" resultType="com.doug.kplate.entity.SysMenuEntity">
+    <select id="queryObject" resultType="com.doug.kplate.entity.sys.SysMenuEntity">
 		select * from sys_menu where menu_id = #{value}
 	</select>
 
-    <insert id="save" parameterType="com.doug.kplate.entity.SysMenuEntity">
+    <insert id="save" parameterType="com.doug.kplate.entity.sys.SysMenuEntity">
 		insert into sys_menu
 		(
 			`menu_id`, 
@@ -31,15 +31,15 @@
 			#{orderNum}
 		)
 	</insert>
-    <select id="queryListParentId" resultType="com.doug.kplate.entity.SysMenuEntity">
+    <select id="queryListParentId" resultType="com.doug.kplate.entity.sys.SysMenuEntity">
 		select * from sys_menu where parent_id = #{parentId} and status = 0 order by order_num asc
 	</select>
 
-    <select id="queryNotButtonList" resultType="com.doug.kplate.entity.SysMenuEntity">
+    <select id="queryNotButtonList" resultType="com.doug.kplate.entity.sys.SysMenuEntity">
 		select * from sys_menu where type != 2 order by order_num asc 
 	</select>
 
-    <select id="queryList" resultType="com.doug.kplate.entity.SysMenuEntity">
+    <select id="queryList" resultType="com.doug.kplate.entity.sys.SysMenuEntity">
         select m.*,(select p.name from sys_menu p where p.menu_id = m.parent_id) as parentName
         from sys_menu m
         where 1=1
@@ -69,7 +69,7 @@
     </select>
 
     <!-- 查询用户的权限列表 -->
-    <select id="queryUserList" resultType="com.doug.kplate.entity.SysMenuEntity">
+    <select id="queryUserList" resultType="com.doug.kplate.entity.sys.SysMenuEntity">
 		select distinct m.*,(select p.name from sys_menu p where p.menu_id = m.parent_id) as parentName
 			from sys_user_role ur 
 			LEFT JOIN sys_role_menu rm on ur.role_id = rm.role_id 
@@ -79,7 +79,7 @@
 
     <!--查询不同类型的菜单列表-->
     <select id="getMenuList" parameterType="java.util.Map"
-            resultType="com.doug.kplate.entity.SysMenuEntity">
+            resultType="com.doug.kplate.entity.sys.SysMenuEntity">
         select * from sys_menu where 1=1 and status = 0
         <if test="flag == 1">
             and parent_id = 0 and type in (0,1)
@@ -112,7 +112,7 @@
         </if>
     </select>
 
-    <update id="update" parameterType="com.doug.kplate.entity.SysMenuEntity">
+    <update id="update" parameterType="com.doug.kplate.entity.sys.SysMenuEntity">
         update sys_menu
         <set>
             <if test="parentId != null">`parent_id` = #{parentId},</if>

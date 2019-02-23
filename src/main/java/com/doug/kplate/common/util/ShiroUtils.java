@@ -1,7 +1,7 @@
 package com.doug.kplate.common.util;
 
 import com.doug.kplate.common.exception.RRException;
-import com.doug.kplate.entity.SysUserEntity;
+import com.doug.kplate.entity.sys.SysUserEntity;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;

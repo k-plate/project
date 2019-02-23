@@ -37,7 +37,7 @@ $(function () {
         rownumbers: false,
         rownumWidth: 25,
         autowidth: true,
-        multiselect: true,
+        multiselect: false,
         pager: "#jqGridPager",
         jsonReader: {
             root: "page.list",
@@ -178,6 +178,7 @@ var vm = new Vue({
             vm.showList = false;
             vm.title = "修改";
             vm.getMenuTree(roleId);
+            vm.flag = 0;
         },
         detail: function (roleId) {
             vm.showList = false;

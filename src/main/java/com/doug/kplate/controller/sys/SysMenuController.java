@@ -2,14 +2,14 @@ package com.doug.kplate.controller.sys;
 
 import com.doug.kplate.common.exception.RRException;
 import com.doug.kplate.common.util.Query;
-import com.doug.kplate.dto.SysMenuDto;
-import com.doug.kplate.entity.SysMenuEntity;
-import com.doug.kplate.service.ShiroService;
-import com.doug.kplate.service.SysMenuService;
+import com.doug.kplate.dto.sys.SysMenuDto;
+import com.doug.kplate.entity.sys.SysMenuEntity;
+import com.doug.kplate.service.sys.ShiroService;
+import com.doug.kplate.service.sys.SysMenuService;
 import com.doug.kplate.utils.Constant;
 import com.doug.kplate.utils.PageUtils;
 import com.doug.kplate.utils.R;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -189,7 +189,7 @@ public class SysMenuController extends AbstractController {
             throw new RRException("菜单名称不能为空");
         }
 
-        if (menu.getParentId() == null) {
+        if (menu.getType() != 0 && menu.getFirstMenu() == null) {
             throw new RRException("上级菜单不能为空");
         }
 
@@ -202,8 +202,8 @@ public class SysMenuController extends AbstractController {
 
         //上级菜单类型
         int parentType = Constant.MenuType.CATALOG.getValue();
-        if (menu.getParentId() != 0) {
-            SysMenuEntity parentMenu = sysMenuService.queryObject(menu.getParentId());
+        if (menu.getType() != 0 && menu.getFirstMenu() != 0) {
+            SysMenuEntity parentMenu = sysMenuService.queryObject(menu.getFirstMenu().longValue());
             parentType = parentMenu.getType();
         }
 
@@ -218,9 +218,9 @@ public class SysMenuController extends AbstractController {
 
         //按钮
         if (menu.getType() == Constant.MenuType.BUTTON.getValue()) {
-            if (parentType != Constant.MenuType.MENU.getValue()) {
-                throw new RRException("上级菜单只能为菜单类型");
-            }
+//            if (parentType != Constant.MenuType.MENU.getValue()) {
+//                throw new RRException("上级菜单只能为菜单类型");
+//            }
             return;
         }
     }

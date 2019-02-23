@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.doug.kplate.dao.SysUserDao">
-    <resultMap id="BaseResultMap" type="com.doug.kplate.entity.SysUserEntity">
+<mapper namespace="com.doug.kplate.dao.sys.SysUserDao">
+    <resultMap id="BaseResultMap" type="com.doug.kplate.entity.sys.SysUserEntity">
         <result property="userId" column="user_id"/>
         <result property="username" column="username"/>
         <result property="mobile" column="mobile"/>
@@ -14,7 +14,7 @@
         <result property="creator" column="creator"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>
-    <select id="queryObject" resultType="com.doug.kplate.entity.SysUserEntity">
+    <select id="queryObject" resultType="com.doug.kplate.entity.sys.SysUserEntity">
 		select * from sys_user where user_id = #{value}
 	</select>
     <select id="getUserListOfRole" resultMap="BaseResultMap" parameterType="java.util.Map">
@@ -92,11 +92,11 @@
 	</select>
 
     <select id="queryByUserName" resultMap="BaseResultMap" parameterType="java.lang.String"
-            resultType="com.doug.kplate.entity.SysUserEntity">
+            resultType="com.doug.kplate.entity.sys.SysUserEntity">
 		select * from sys_user where username = #{username}
 	</select>
 
-    <insert id="save" parameterType="com.doug.kplate.entity.SysUserEntity" useGeneratedKeys="true"
+    <insert id="save" parameterType="com.doug.kplate.entity.sys.SysUserEntity" useGeneratedKeys="true"
             keyProperty="userId">
 		insert into sys_user
 		(
@@ -134,7 +134,7 @@
 		)
 	</insert>
 
-    <update id="update" parameterType="com.doug.kplate.entity.SysUserEntity">
+    <update id="update" parameterType="com.doug.kplate.entity.sys.SysUserEntity">
         update sys_user
         <set>
             <if test="username != null">`username` = #{username},</if>

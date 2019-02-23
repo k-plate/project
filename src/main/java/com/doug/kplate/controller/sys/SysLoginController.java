@@ -1,9 +1,9 @@
 package com.doug.kplate.controller.sys;
 
 
-import com.doug.kplate.entity.SysUserEntity;
-import com.doug.kplate.service.SysUserService;
-import com.doug.kplate.service.SysUserTokenService;
+import com.doug.kplate.entity.sys.SysUserEntity;
+import com.doug.kplate.service.sys.SysUserService;
+import com.doug.kplate.service.sys.SysUserTokenService;
 import com.doug.kplate.utils.R;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.Map;
 
 /**

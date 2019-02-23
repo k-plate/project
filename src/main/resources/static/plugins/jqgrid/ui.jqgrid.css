@@ -46,7 +46,7 @@
 .ui-jqgrid tr.jqgrow { outline-style: none; }
 .ui-jqgrid tr.jqgroup { outline-style: none; }
 .ui-jqgrid tr.jqgrow td {font-weight: normal; overflow: hidden; white-space: pre; height: 23px;padding: 1px 2px 1px 2px;border-bottom-width: 1px; border-bottom-color: inherit; border-bottom-style: solid;}
-.ui-jqgrid tr.jqgfirstrow td {padding: 0 2px 0 2px;border-right-width: 1px; border-right-style: solid; height:auto;}
+.ui-jqgrid tr.jqgfirstrow td {height:auto;}
 .ui-jqgrid tr.jqgroup td {font-weight: normal; overflow: hidden; white-space: pre; height: 22px;padding: 0 2px 0 2px;border-bottom-width: 1px; border-bottom-color: inherit; border-bottom-style: solid;}
 .ui-jqgrid tr.jqfoot td {font-weight: bold; overflow: hidden; white-space: pre; height: 22px;padding: 0 2px 0 2px;border-bottom-width: 1px; border-bottom-color: inherit; border-bottom-style: solid;}
 .ui-jqgrid tr.ui-row-ltr td {text-align:left;border-right-width: 1px; border-right-color: inherit; border-right-style: solid;}

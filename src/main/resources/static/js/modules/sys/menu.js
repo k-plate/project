@@ -52,7 +52,7 @@ $(function () {
         rownumbers: false,
         rownumWidth: 25,
         autowidth: true,
-        multiselect: true,
+        multiselect: false,
         pager: "#jqGridPager",
         jsonReader: {
             root: "page.list",

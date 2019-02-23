@@ -1,6 +1,6 @@
 package com.doug.kplate.controller.sys;
 
-import com.doug.kplate.entity.SysUserEntity;
+import com.doug.kplate.entity.sys.SysUserEntity;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

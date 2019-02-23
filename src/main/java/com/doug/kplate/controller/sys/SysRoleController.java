@@ -2,9 +2,9 @@ package com.doug.kplate.controller.sys;
 
 import com.doug.kplate.common.util.Query;
 import com.doug.kplate.common.validator.ValidatorUtils;
-import com.doug.kplate.entity.SysRoleEntity;
-import com.doug.kplate.service.SysRoleMenuService;
-import com.doug.kplate.service.SysRoleService;
+import com.doug.kplate.entity.sys.SysRoleEntity;
+import com.doug.kplate.service.sys.SysRoleMenuService;
+import com.doug.kplate.service.sys.SysRoleService;
 import com.doug.kplate.utils.Constant;
 import com.doug.kplate.utils.PageUtils;
 import com.doug.kplate.utils.R;

@@ -1,8 +1,8 @@
 package com.doug.kplate.oauth2;
 
-import com.doug.kplate.entity.SysUserEntity;
-import com.doug.kplate.entity.SysUserTokenEntity;
-import com.doug.kplate.service.ShiroService;
+import com.doug.kplate.entity.sys.SysUserEntity;
+import com.doug.kplate.entity.sys.SysUserTokenEntity;
+import com.doug.kplate.service.sys.ShiroService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;

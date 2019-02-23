@@ -22,29 +22,17 @@ spring:
             max-file-size: 100MB
             max-request-size: 100MB
             enabled: true
-    # ָ����̬��Դ��·��
     resources:
         static-locations: classpath:/static/,classpath:/view/
     devtools:
         restart:
            enabled: true
            exclude: view/**
-#    redis:
-#        open: false  # �Ƿ���redis����  true����   false�ر�
-#        database: 0
-#        host: localhost
-#        port: 16379
-#        password:       # ���루Ĭ��Ϊ�գ�
-#        timeout: 6000  # ���ӳ�ʱʱ�������룩
-#        pool:
-#            max-active: 1000  # ���ӳ������������ʹ�ø�ֵ��ʾû�����ƣ�
-#            max-wait: -1      # ���ӳ���������ȴ�ʱ�䣨ʹ�ø�ֵ��ʾû�����ƣ�
-#            max-idle: 10      # ���ӳ��е�����������
-#            min-idle: 5       # ���ӳ��е���С��������
+
     datasource:
-        url: jdbc:mysql://107.172.77.191:3306/k_plate?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+        url: jdbc:mysql://localhost:3306/k_plate?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
         username: root
-        password: root123
+        password: root
         driver-class-name: com.mysql.jdbc.Driver
         type: com.alibaba.druid.pool.DruidDataSource
         druid:
