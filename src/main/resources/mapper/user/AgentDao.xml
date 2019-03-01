@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doug.kplate.dao.user.AgentDao">
+    <resultMap id="BaseResultMap" type="com.doug.kplate.entity.user.Agent">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="agent_code" jdbcType="VARCHAR" property="agentCode"/>
+        <result column="agent_name" jdbcType="VARCHAR" property="agentName"/>
+        <result column="agent_type" jdbcType="INTEGER" property="agentType"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="role_id" jdbcType="INTEGER" property="roleId"/>
+        <result column="contact_name" jdbcType="VARCHAR" property="contactName"/>
+        <result column="contact_mobile" jdbcType="VARCHAR" property="contactMobile"/>
+        <result column="note_user_name" jdbcType="VARCHAR" property="noteUserName"/>
+        <result column="dividends" jdbcType="VARCHAR" property="dividends"/>
+        <result column="commission_ratio" jdbcType="VARCHAR" property="commissionRatio"/>
+        <result column="margin" jdbcType="DECIMAL" property="margin"/>
+        <result column="balance" jdbcType="DECIMAL" property="balance"/>
+        <result column="giving_money" jdbcType="DECIMAL" property="givingMoney"/>
+        <result column="createtime" jdbcType="TIMESTAMP" property="createtime"/>
+        <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime"/>
+        <result column="recommend_code" jdbcType="VARCHAR" property="recommendCode"/>
+        <result column="be_recommend_code" jdbcType="VARCHAR" property="beRecommendCode"/>
+    </resultMap>
+
+    <select id="getAgentAll" resultType="com.doug.kplate.entity.user.Agent">
+        select * from agent
+        <where>
+            <include refid="select_content"/>
+        </where>
+        ORDER BY createtime DESC
+        <if test="param.offset != null and param.limit != null">
+            limit #{param.offset}, #{param.limit}
+        </if>
+    </select>
+
+    <select id="getAgentCount" resultType="java.lang.Integer">
+        select count(1) from agent
+        <where>
+            <include refid="select_content"/>
+        </where>
+    </select>
+
+    <sql id="select_content">
+        1 = 1
+        <if test="param.type != null and param.type != ''">
+            and agent_type = #{param.type}
+        </if>
+        <if test="param.title != null and param.title != ''">
+            and agent_code like concat('%',#{param.title},'%')
+            or contact_name like concat('%',#{param.title},'%')
+            or contact_mobile like concat('%',#{param.title},'%')
+        </if>
+        <if test="param.startTime != null and param.startTime != '' and param.endTime != null and param.endTime != ''">
+            and createtime between #{param.startTime} and #{param.startTime}
+        </if>
+    </sql>
+</mapper>
