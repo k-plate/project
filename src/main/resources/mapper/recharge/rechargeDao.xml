@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.doug.kplate.dao.recharge.RechargeDao">
+    <resultMap id="BaseResultMap" type="com.doug.kplate.entity.recharge.Recharge">
+        <result property="id" column="id"/>
+        <result property="rechargeCode" column="recharge_code"/>
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="rechargeMoney" column="recharge_money"/>
+        <result property="rechargeBalance" column="recharge_balance"/>
+        <result property="remark" column="remark"/>
+        <result property="auditTime" column="audit_time"/>
+        <result property="auditStatus" column="audit_status"/>
+        <result property="createUser" column="create_time"/>
+        <result property="createTime" column="create_user"/>
+        <result property="updateUser" column="update_user"/>
+        <result property="auditUser" column="audit_user"/>
+    </resultMap>
+    <select id="queryObject" resultType="com.doug.kplate.entity.recharge.Recharge">
+		select * from recharge where user_id = #{value}
+	</select>
+    <select id="queryList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select u* from sys_user u,sys_role sr,sys_user_role sur
+        where sur.role_id = sr.role_id and sur.user_id = u.user_id
+        <if test="username != null and username != ''">
+            and u.username like concat('%',#{username},'%')
+        </if>
+        <if test="name != null and name != ''">
+            and u.name like concat('%',#{name},'%')
+        </if>
+        <if test="mobile != null and mobile != ''">
+            and u.mobile like concat('%',#{mobile},'%')
+        </if>
+        <if test="status != null and status != ''">
+            and u.status = #{status}
+        </if>
+        order by u.user_id desc
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(*) from sys_user u,sys_role sr,sys_user_role sur
+        where sur.role_id = sr.role_id and sur.user_id = u.user_id
+        <if test="username != null and username != ''">
+            and u.username like concat('%',#{username},'%')
+        </if>
+        <if test="name != null and name != ''">
+            and u.name like concat('%',#{name},'%')
+        </if>
+        <if test="mobile != null and mobile != ''">
+            and u.mobile like concat('%',#{mobile},'%')
+        </if>
+        <if test="roleId != null">
+            and sr.role_id = #{roleId}
+        </if>
+    </select>
+
+
+</mapper>
