@@ -1,39 +1,52 @@
-var toUpdate = '<a  id="toUpdate" data-value=""  class="toUpdate btn btn-success" >修改</a>';
-var toFrozen = '<a  id="toFrozen" data-value=""  class="toFrozen btn btn btn-danger" >冻结</a>';
-var toUnFrozen = '<a id="toUnFrozen" data-value=""  class="toUnFrozen btn btn-success">解冻</a>';
-var toDetail = '<a id="toDetail" data-value=""  class="toDetail btn btn-success" >查看</a>';
-
 $(function () {
 
 
     $("#jqGrid").jqGrid({
-        url: baseURL + 'sys/user/list',
+        url: baseURL + 'recharge/recharge/list',
         datatype: "json",
         colModel: [
-            {label: '用户ID', name: 'userId', index: "user_id", width: 45, key: true},
-            {label: '账号', name: 'username', width: 75},
-            {label: '姓名', name: 'name', width: 75},
-            {label: '联系电话', name: 'mobile', width: 80},
-            {label: '所属角色', name: 'roleName', width: 90},
-            {label: '创建时间', name: 'createTime', width: 90},
-            {
-                label: '状态', name: 'status', width: 25,
+            {name:'id',index:'id', hidden:true,},
+            {label: '编号', name: 'rechargeCode', width: 45,},
+            {label: '交易账号', name: 'userId', width: 75},
+            {label: '交易姓名', name: 'userName', width: 75},
+            {label: '操作时间', name: 'updateTime', width: 110},
+            {label: '金额', name: 'rechargeMoney', width: 60},
+            {label: '会员账户余额', name: 'rechargeBalance', width: 80},
+            {label: '备注', name: 'remark', width: 90},
+            {label: '审核时间', name: 'auditTime', width: 110},
+            {label: '审核状态', name: 'auditStatus', width: 90,
                 formatter: function (value, options, row) {
-                    if (value == '1') {
-                        return "正常";
-                    }
-                    else if (value == '0') {
-                        return "禁用";
-                    }
-                    else {
-                        return "-";
-                    }
-                }
-            },
-            {
-                label: '管理', name: 'clueId', width: 150, formatter: operateFormatter
-
-            }
+                            if (value == '0') {
+                                return "拒绝";
+                            }
+                            else if (value == '1') {
+                                return "通过";
+                            }
+                            else if(value=='2'){
+                                return "充值中";
+                            }else{
+                                return '- -';
+                            }
+                        }},
+            {label: '操作', name: 'cz', width: 50,formatter:operateFormatter}
+            // {
+            //     label: '状态', name: 'status', width: 25,
+            //     formatter: function (value, options, row) {
+            //         if (value == '1') {
+            //             return "正常";
+            //         }
+            //         else if (value == '0') {
+            //             return "禁用";
+            //         }
+            //         else {
+            //             return "-";
+            //         }
+            //     }
+            // },
+            // {
+            //     label: '管理', name: 'clueId', width: 150, formatter: operateFormatter
+            //
+            // }
         ],
         viewrecords: true,
         height: 385,
@@ -62,43 +75,31 @@ $(function () {
     });
 
     function operateFormatter(value, options, row) {
-        var reslut = toUpdate;
-        reslut = reslut + (" "+toDetail);
-        if (row['status'] == 0) {
-            //冻结状态
-            reslut = reslut + (" "+toUnFrozen);
-        } else if (row['status'] == 1) {
-            //正常状态
-            reslut = reslut + (" "+toFrozen);
-        }
+        var reslut = "<a id='audit' data-value='' class='btn btn-success'>审核</a>";
         return reslut;
     }
 
-//给行内按钮绑定事件-查看
-    $("#jqGrid").on("click", ".toDetail", function () {
-        var userId = $(this).parents('tr').attr("id");
-        vm.detail(userId);
-    });
-//给行内按钮绑定事件-修改
-    $("#jqGrid").on("click", ".toUpdate", function () {
-        var userId = $(this).parents('tr').attr("id");
-        vm.update(userId);
-    });
-//给行内按钮绑定事件-恢复
-    $("#jqGrid").on("click", ".toUnFrozen", function () {
-        var userId = $(this).parents('tr').attr("id");
-        vm.updateStatus(1, userId);
-    });
-//给行内按钮绑定事件-冻结
-    $("#jqGrid").on("click", ".toFrozen", function () {
-        var userId = $(this).parents('tr').attr("id");
-        vm.updateStatus(0, userId);
+//给行内按钮绑定事件-审核
+    $("#jqGrid").on("click", "#audit", function () {
+        var rechargeId = $(this).parents('tr').attr("id");
+        vm.detail(rechargeId);
     });
 
     laydate.render({
         elem: '#starttime',
-        type:'datetime'//指定元素
+        type:'datetime',//指定元素
+        done: function(value, date, endDate) {
+                vm.params.starttime = value;
+        }
     });
+
+    laydate.render({
+        elem:'#endtime',
+        type:'datetime',
+        done: function(value, date, endDate) {
+            vm.params.endtime = value;
+        }
+    })
 });
 
 var setting = {
@@ -120,7 +121,9 @@ var vm = new Vue({
     el: '#honghu_cloud',
     data: {
         q: {
-            username: null
+            username: null,
+            starttime:null,
+            endtime:null
         },
         showList: true,
         title: null,
@@ -141,77 +144,15 @@ var vm = new Vue({
         query: function () {
             vm.reload();
         },
-        add: function () {
+        detail: function (rechargeId) {
             vm.showList = false;
-            vm.title = "新增";
-            vm.user = {status: null, username: null, name: null, cleanPassword: "123456", mobile: null, roleIdList: [], roleId: null,};
-            //获取角色信息
-            this.getRoleList();
-        },
-        detail: function (userId) {
-            vm.showList = false;
-            vm.title = "查看";
+            vm.title = "审核";
             vm.flag = 1
             //获取角色信息
             this.getRoleList();
         },
-        updateStatus: function (status, userId) {
-            $.get(baseURL + "sys/user/updateStatus?userId=" + userId + "&status=" + status, function (r) {
-                if (r.code == 0) {
-                    alert('操作成功', function () {
-                        vm.reload();
-                    });
-                } else {
-                    alert(r.msg);
-                }
-            });
-        },
-        update: function (userId) {
+        saveOrUpdate:function(){
 
-            vm.showList = false;
-            vm.title = "修改";
-
-            vm.getUser(userId);
-            //获取角色信息
-            this.getRoleList();
-        },
-        del: function () {
-
-            confirm('确定要删除选中的记录？', function () {
-                $.ajax({
-                    type: "POST",
-                    url: baseURL + "sys/user/delete",
-                    contentType: "application/json",
-                    data: JSON.stringify(userIds),
-                    success: function (r) {
-                        if (r.code == 0) {
-                            alert('操作成功', function () {
-                                vm.reload();
-                            });
-                        } else {
-                            alert(r.msg);
-                        }
-                    }
-                });
-            });
-        },
-        saveOrUpdate: function () {
-            var url = vm.user.userId == null ? "sys/user/save" : "sys/user/update";
-            $.ajax({
-                type: "POST",
-                url: baseURL + url,
-                contentType: "application/json",
-                data: JSON.stringify(vm.user),
-                success: function (r) {
-                    if (r.code === 0) {
-                        alert('操作成功', function () {
-                            vm.reload();
-                        });
-                    } else {
-                        alert(r.msg);
-                    }
-                }
-            });
         },
         getUser: function (userId) {
             $.get(baseURL + "sys/user/info/" + userId, function (r) {
@@ -224,12 +165,6 @@ var vm = new Vue({
                 vm.user.userId = r.user.userId;
                 vm.user.roleId = r.user.roleId;
             });
-        },
-        exportUser:function () {
-            //导出用户
-            var url="sys/user/export";
-            var params = jQuery.param(vm.q);
-            excel(baseURL+url,params);
         },
         getRoleList: function () {
             $.get(baseURL + "sys/role/select", function (r) {

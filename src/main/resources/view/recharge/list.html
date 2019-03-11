@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../plugins/ztree/css/metroStyle/metroStyle.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/custom/custom.css">
-    <link rel="stylesheet" href="../plugins/layer/css/modules/laydate/default/laydate.css">
+    <link rel="stylesheet" href="../css/layer/laydate.css">
     <script src="../libs/jquery.min.js"></script>
     <script src="../libs/bootstrap.min.js"></script>
     <script src="../libs/vue.min.js"></script>
@@ -19,7 +19,7 @@
     <script src="../plugins/jqgrid/jquery.jqGrid.min.js"></script>
     <script src="../plugins/ztree/jquery.ztree.all.min.js"></script>
     <script src="../js/common.js"></script>
-    <script src="../plugins/layer/laydate.js"></script>
+    <script src="../plugins/laydate/laydate.js"></script>
 
 
 </head>
@@ -28,9 +28,11 @@
     <div v-show="showList">
         <div class="grid-btn-djh">
             <div class="form-group col-sm-2" style="width: 100%;">
-                交易姓名：<input type="text" class="form-select" v-model="q.username" @keyup.enter="query" placeholder="交易姓名">
-                订单时间：<input type="text" class="form-select" v-model="q.starttime" @keyup.enter="query" placeholder="开始时间">
-                至<input type="text" class="form-select" v-model="q.username" @keyup.enter="query" placeholder="结束时间">
+                交易姓名：<input type="text" class="form-select" v-model="q.username" @keyup.enter="query"
+                            placeholder="交易姓名">
+                订单时间：<input type="text" class="form-select" id="starttime" v-model="q.starttime" @keyup.enter="query"
+                            placeholder="开始时间">
+                至<input type="text" class="form-select" id="endtime" v-model="q.endtime" @keyup.enter="query" placeholder="结束时间">
                 <!--类型：
                 <select v-model="q.status" @keyup.enter="query" class="form-select">
                     <option value="">默认不选</option>
@@ -38,15 +40,15 @@
                     <option value="0">后台充值</option>
                 </select>-->
             </div>
-            <a class="btn btn-info" @click="query">查询</a>
+            <a class="btn btn-info" @click="query">查询</a>&nbsp;&nbsp;<a class="btn btn-info" id="queryAll">搜索全部</a><a class="btn btn-info" id="allMoney">充值总金额：</a>
 
         </div>
         <table id="jqGrid"></table>
         <div id="jqGridPager"></div>
-        <div style="padding-top: 20px;margin-left: 15px;">
-            <a v-if="hasPermission('sys:user:save')" class="btn btn-success" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
-            <a class="btn btn-success" @click="exportUser"><i class="fa fa-plus"></i>&nbsp;导出</a>
-        </div>
+        <!--<div style="padding-top: 20px;margin-left: 15px;">-->
+            <!--<a v-if="hasPermission('sys:user:save')" class="btn btn-success" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>-->
+            <!--<a class="btn btn-success" @click="exportUser"><i class="fa fa-plus"></i>&nbsp;导出</a>-->
+        <!--</div>-->
     </div>
 
     <div v-show="!showList" class="panel panel-default">

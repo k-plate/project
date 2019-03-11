@@ -17,15 +17,15 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("recharge/recharge")
+@RequestMapping("/recharge/recharge")
 public class RechargeController extends AbstractController {
     @Autowired
     private RechargeService rechargeService;
-    @RequestMapping("list")
-    @RequiresPermissions("recharge:recharge:list")
     /**
      * 查询充值列表
      */
+    @RequestMapping("list")
+    @RequiresPermissions("recharge:recharge:list")
     public R list(@RequestParam Map<String, Object> params){
         //如果不是超级管理员，则只查询自己创建的角色列表
         if(getUserId() != Constant.SUPER_ADMIN){

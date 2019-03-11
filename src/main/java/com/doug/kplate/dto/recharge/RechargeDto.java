@@ -16,6 +16,15 @@ public class RechargeDto {
   private Timestamp auditTime;//审核时间
   private long auditStatus;//审核/状态
   private String auditUser;//审核人
+  private int allMoney;
+
+  public int getAllMoney() {
+    return allMoney;
+  }
+
+  public void setAllMoney(int allMoney) {
+    this.allMoney = allMoney;
+  }
 
   public String getAuditUser() {
     return auditUser;

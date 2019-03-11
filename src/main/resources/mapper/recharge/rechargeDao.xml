@@ -13,50 +13,41 @@
         <result property="remark" column="remark"/>
         <result property="auditTime" column="audit_time"/>
         <result property="auditStatus" column="audit_status"/>
-        <result property="createUser" column="create_time"/>
-        <result property="createTime" column="create_user"/>
+        <result property="createUser" column="create_user"/>
+        <result property="createTime" column="create_time"/>
         <result property="updateUser" column="update_user"/>
         <result property="auditUser" column="audit_user"/>
     </resultMap>
-    <select id="queryObject" resultType="com.doug.kplate.entity.recharge.Recharge">
-		select * from recharge where user_id = #{value}
-	</select>
-    <select id="queryList" resultMap="BaseResultMap" parameterType="java.util.Map">
-        select u* from sys_user u,sys_role sr,sys_user_role sur
-        where sur.role_id = sr.role_id and sur.user_id = u.user_id
+    <select id="selectList" resultMap="BaseResultMap" parameterType="java.util.Map">
+        select r.* from recharge r
+        where 1=1
         <if test="username != null and username != ''">
-            and u.username like concat('%',#{username},'%')
+            and r.user_name like concat('%',#{username},'%')
         </if>
-        <if test="name != null and name != ''">
-            and u.name like concat('%',#{name},'%')
+        <if test="starttime != null and starttime != ''">
+            <![CDATA[ and r.create_time >= to_date(#{starttime,jdbcType=TIMESTAMP},'yyyy-MM-dd hh24:mi:ss')]]>
         </if>
-        <if test="mobile != null and mobile != ''">
-            and u.mobile like concat('%',#{mobile},'%')
+        <if test="endtime != null and endtime != ''">
+            <![CDATA[ and r.create_time <= to_date(#{endtime,jdbcType=TIMESTAMP},'yyyy-MM-dd hh24:mi:ss')]]>
         </if>
-        <if test="status != null and status != ''">
-            and u.status = #{status}
-        </if>
-        order by u.user_id desc
-        <if test="offset != null and limit != null">
-            limit #{offset}, #{limit}
-        </if>
+
     </select>
 
-    <select id="queryTotal" resultType="int">
-        select count(*) from sys_user u,sys_role sr,sys_user_role sur
-        where sur.role_id = sr.role_id and sur.user_id = u.user_id
-        <if test="username != null and username != ''">
-            and u.username like concat('%',#{username},'%')
-        </if>
-        <if test="name != null and name != ''">
-            and u.name like concat('%',#{name},'%')
-        </if>
-        <if test="mobile != null and mobile != ''">
-            and u.mobile like concat('%',#{mobile},'%')
-        </if>
-        <if test="roleId != null">
-            and sr.role_id = #{roleId}
-        </if>
+    <select id="selectTotal" resultType="int">
+        select count(*) from recharge
+        where 1=1
+        <!--<if test="username != null and username != ''">-->
+            <!--and u.username like concat('%',#{username},'%')-->
+        <!--</if>-->
+        <!--<if test="name != null and name != ''">-->
+            <!--and u.name like concat('%',#{name},'%')-->
+        <!--</if>-->
+        <!--<if test="mobile != null and mobile != ''">-->
+            <!--and u.mobile like concat('%',#{mobile},'%')-->
+        <!--</if>-->
+        <!--<if test="roleId != null">-->
+            <!--and sr.role_id = #{roleId}-->
+        <!--</if>-->
     </select>
 
 

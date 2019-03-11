@@ -1,9 +1,10 @@
 package com.doug.kplate.entity.recharge;
 
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class Recharge {
+public class Recharge implements Serializable {
 
   private long id;//编号
   private String rechargeCode;//充值编号
